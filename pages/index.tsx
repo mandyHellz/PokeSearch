@@ -1,73 +1,33 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import DefaultLayout from '../components/Layouts/DefaultLayout'
+import type { NextPage } from "next";
+import Head from "next/head";
+import Image from "next/image";
+import DefaultLayout from "../components/Layouts/DefaultLayout";
+import SignUp from "./access";
 
 const Home: NextPage = () => {
   return (
-    <DefaultLayout>
+    <>
       <Head>
-        <title>Mkplace Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>React Learnings</title>
+        <link rel="icon" href="/favicon.svg" />
       </Head>
+      <DefaultLayout>
+        <div className="-mt-20 whitespace-nowrap">
+          <div className="w-full mx-auto">
+            <img src="/img/pokemon-banner-03.jpeg" alt="" className="w-full" />
+          </div>
+          <div className="md:relative md:-top-1/3 xl:-top-1/2 md:left-44 lg:left-60 xl:left-1/4 bg-white mx-auto px-2 w-full md:w-1/2 xl:w-1/3 rounded-md border border-gray-200">
+            <div className="mx-auto text-center p-5">
+              <p className="border-b py-2">Cadastre-se:</p>
+              <div className="my-10">
+                <SignUp />
+              </div>
+            </div>
+          </div>
+        </div>
+      </DefaultLayout>
+    </>
+  );
+};
 
-      <h1 className="text-6xl font-bold">
-        Welcome to{' '}
-        <a className="text-blue-600" href="https://nextjs.org">
-          Next.js!
-        </a>
-      </h1>
-
-      <p className="mt-3 text-2xl">
-        Get started by editing{' '}
-        <code className="p-3 font-mono text-lg bg-gray-100 rounded-md">
-          pages/index.js
-        </code>
-      </p>
-
-      <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
-        <a
-          href="https://nextjs.org/docs"
-          className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-        >
-          <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-          <p className="mt-4 text-xl">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn"
-          className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-        >
-          <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-          <p className="mt-4 text-xl">
-            Learn about Next.js in an interactive course with quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://github.com/vercel/next.js/tree/master/examples"
-          className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-        >
-          <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-          <p className="mt-4 text-xl">
-            Discover and deploy boilerplate example Next.js projects.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-        >
-          <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-          <p className="mt-4 text-xl">
-            Instantly deploy your Next.js site to a public URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </DefaultLayout>
-  )
-}
-
-export default Home
+export default Home;
