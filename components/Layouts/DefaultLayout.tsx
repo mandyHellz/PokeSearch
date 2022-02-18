@@ -1,15 +1,21 @@
-import React from 'react';
-import Footer from './Footer';
-import Header from './Header'
+import React, { ReactNode } from "react";
+import dynamic from "next/dynamic";
+import Footer from "./Footer";
 
-const DefaultLayout: React.FC = ({ children }) => {
+const Header = dynamic((): Promise<any> => import("./Header"), {
+  ssr: false,
+});
+interface DefaultLayoutProps {
+  children: ReactNode;
+  useFooter?: boolean;
+}
+
+const DefaultLayout = ({ children, useFooter = true }: DefaultLayoutProps) => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
+    <div className="flex flex-col relative min-w-xs h-screen text-primary-800">
       <Header />
-      <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        {children}
-      </main>
-      <Footer />
+      {children}
+      {useFooter && <Footer />}
     </div>
   );
 };
