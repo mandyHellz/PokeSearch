@@ -1,8 +1,9 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import GetPokemon from "../components/GetPokemon/GetPokemon";
 import DefaultLayout from "../components/Layouts/DefaultLayout";
-import SignUp from "./access";
+import Access from "../components/SignIn/access";
 
 const Home: NextPage = () => {
   return (
@@ -18,10 +19,11 @@ const Home: NextPage = () => {
           </div>
           <div className="md:relative md:-top-1/3 xl:-top-1/2 md:left-44 lg:left-60 xl:left-1/4 bg-white mx-auto px-2 w-full md:w-1/2 xl:w-1/3 rounded-md border border-gray-200">
             <div className="mx-auto text-center p-5">
-              <p className="border-b py-2">Cadastre-se:</p>
+              {/* <p className="border-b py-2">Cadastre-se:</p>
               <div className="my-10">
-                <SignUp />
-              </div>
+                <Access />
+              </div> */}
+              <GetPokemon />
             </div>
           </div>
         </div>
