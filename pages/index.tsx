@@ -17,14 +17,16 @@ const Home: NextPage = () => {
           <div className="w-full mx-auto">
             <img src="/img/pokemon-banner-03.jpeg" alt="" className="w-full" />
           </div>
+
           <div className="md:relative md:-top-1/3 xl:-top-1/2 md:left-44 lg:left-60 xl:left-1/4 bg-white mx-auto px-2 w-full md:w-1/2 xl:w-1/3 rounded-md border border-gray-200">
-            <div className="mx-auto text-center p-5">
-              {/* <p className="border-b py-2">Cadastre-se:</p>
+            {/* <div className="mx-auto text-center p-5">
+              <p className="border-b py-2">Cadastre-se:</p>
               <div className="my-10">
                 <Access />
-              </div> */}
-              <GetPokemon />
-            </div>
+              </div>
+            </div> */}
+
+            <GetPokemon marginBottom={10} />
           </div>
         </div>
       </DefaultLayout>

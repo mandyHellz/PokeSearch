@@ -10,7 +10,7 @@ const pokemonData = {
   weight: "",
 };
 
-const GetPokemon = () => {
+const GetPokemon = ({ marginBottom }: { marginBottom?: number }) => {
   //create a state for the data received
   const [pokemon, setPokemon] = useState(pokemonData);
 
@@ -38,7 +38,7 @@ const GetPokemon = () => {
       "https://pokeapi.co/api/v2/pokemon/" + query.trim()
     );
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
     setPokemon(data);
   };
   console.log(query);
@@ -72,10 +72,10 @@ const GetPokemon = () => {
 
         <button
           id="submit-btn"
-          className=" mt-2 md:mt-0 mx-2 rounded-md bg-yellow-400 py-1 px-2 text-white "
+          className=" mt-2 md:mt-0 mx-2 rounded-md bg-yellow-400 py-1 px-2 text-white hover:bg-yellow-500 "
           type="submit"
         >
-          Who is it?
+          Quem é este Pokemon?
         </button>
       </form>
 
@@ -88,6 +88,7 @@ const GetPokemon = () => {
           abilities={pokemon.abilities}
           image={pokemon.sprites.front_default}
           weight={pokemon.weight}
+          marginBottom={marginBottom}
         />
       )}
     </>
