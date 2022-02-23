@@ -8,7 +8,7 @@ const pokemonData = {
   name: "",
   abilities: [],
   sprites: { front_default: "" },
-  types: [{}],
+  types: [],
   weight: "",
 };
 
@@ -38,7 +38,7 @@ const GetPokemon = () => {
   //     "https://pokeapi.co/api/v2/pokemon/" + query.trim()
   //   );
   //   const data = await response.json();
-  //   // console.log(data);
+  //   console.log(data);
   //   setPokemon(data);
   // };
   // console.log(query);
@@ -81,6 +81,7 @@ const GetPokemon = () => {
           abilities={pokemon.abilities}
           image={pokemon.sprites.front_default}
           weight={pokemon.weight}
+          types={pokemon.types}
           marginBottom={10}
         />
       )}

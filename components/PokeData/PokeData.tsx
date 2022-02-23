@@ -5,12 +5,14 @@ const PokeData = ({
   abilities,
   image,
   weight,
+  types,
   marginBottom,
 }: {
   pokeName: string;
   abilities: any;
   image: string;
   weight: string;
+  types: any;
   marginBottom?: number;
 }) => {
   return (
@@ -31,8 +33,16 @@ const PokeData = ({
           </ul>
         </div>
         <div>
-          <p className="font-semibold"> Peso: </p>
-          <p className="italic">{weight} Kgs</p>
+          <p className="font-semibold"> Types: </p>
+          <ul className="italic">
+            {types.map((item: any) => (
+              <li className="capitalize">{item.type.name}</li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <p className="font-semibold"> Weight in Kgs: </p>
+          <p className="italic">{Number(weight) / 10} Kgs</p>
         </div>
       </div>
     </div>

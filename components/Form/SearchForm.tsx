@@ -20,9 +20,9 @@ const SearchForm = ({
     >
       <input
         id="search-bar"
-        className=" w-1/2 border-2 rounded-md outline-none trnsform hover:border-yellow-400 "
-        type="text"
+        className={`w-1/2 border-2 rounded-md outline-none trnsform hover:border-yellow-400 lowercase`}
         required
+        type="text"
         value={search}
         onChange={updateSearch}
       />
