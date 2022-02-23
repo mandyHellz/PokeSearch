@@ -12,21 +12,21 @@ const Home: NextPage = () => {
         <title>React Learnings</title>
         <link rel="icon" href="/favicon.svg" />
       </Head>
+
       <DefaultLayout>
-        <div className="-mt-20 whitespace-nowrap">
-          <div className="w-full mx-auto">
-            <img src="/img/pokemon-banner-03.jpeg" alt="" className="w-full" />
+        <div className="lg:mb-44 2xl:mb-0">
+          <div className="-mt-20">
+            <img
+              src="/img/pokemon-banner-03.jpeg"
+              alt=""
+              className="w-full h-full object-cover"
+            />
           </div>
 
-          <div className="md:relative md:-top-1/3 xl:-top-1/2 md:left-44 lg:left-60 xl:left-1/4 bg-white mx-auto px-2 w-full md:w-1/2 xl:w-1/3 rounded-md border border-gray-200">
-            {/* <div className="mx-auto text-center p-5">
-              <p className="border-b py-2">Cadastre-se:</p>
-              <div className="my-10">
-                <Access />
-              </div>
-            </div> */}
-
-            <GetPokemon marginBottom={10} />
+          <div className="w-full lg:absolute top-28 mb-10 flex flex-col items-center lg:items-end">
+            <div className="w-5/6 lg:w-1/2 2xl:w-1/3 mx-auto lg:mx-10 bg-white bg-opacity-50 rounded-md border border-gray-200">
+              <GetPokemon />
+            </div>
           </div>
         </div>
       </DefaultLayout>
