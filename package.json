@@ -1,5 +1,5 @@
 {
-  "name": "mkplace-admin",
+  "name": "poke-search",
   "private": true,
   "scripts": {
     "dev": "next dev",
