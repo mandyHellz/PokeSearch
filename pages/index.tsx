@@ -23,9 +23,9 @@ const Home: NextPage = () => {
             />
           </div>
 
-          <div className="w-full lg:absolute top-28 mb-10 flex flex-col items-center lg:items-end">
-            <div className="w-5/6 lg:w-1/2 2xl:w-1/3 mx-auto lg:mx-10 bg-white bg-opacity-50 rounded-md border border-gray-200">
-              <GetPokemon />
+          <div className="w-full lg:absolute top-28 mb-10 flex flex-col items-center">
+            <div className="w-5/6 lg:w-1/2 2xl:w-1/3 mx-auto lg:mx-10 bg-white bg-opacity-30 rounded-md">
+              <GetPokemon marginBottom="10" />
             </div>
           </div>
         </div>

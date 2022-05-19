@@ -3,25 +3,52 @@ import PokeData from "../PokeData/PokeData";
 import api from "../../pages/api/api";
 import SearchForm from "../Form/SearchForm";
 
+export interface pokeProps {
+  id: string;
+  name: string;
+  sprites: { other: { home: { front_default: string } } };
+  types: [{ type: { name: string } }];
+  weight: number;
+  height: number;
+  moves: [{ move: { name: string } }];
+  stats: [{ base_stat: number; stat: { name: string } }];
+}
+export interface pokeAttributesProps {
+  descriptions: [{ description: string; language: { name: string } }];
+}
+
 const pokemonData = {
   id: "",
   name: "",
-  abilities: [],
-  sprites: { front_default: "" },
-  types: [],
-  weight: "",
-};
+  sprites: {},
+  types: [{}],
+  weight: 0,
+  height: 0,
+  moves: [{}],
+  stats: [{}],
+} as pokeProps;
 
-const GetPokemon = () => {
+const attributesData = {
+  descriptions: [{}],
+} as pokeAttributesProps;
+
+const GetPokemon = ({
+  marginBottom = "10",
+}: {
+  marginBottom?: "10" | "20";
+}) => {
   //states
   const [pokemon, setPokemon] = useState(pokemonData);
+  const [attributes, setAttributes] = useState(attributesData);
   const [search, setSearch] = useState("");
   const [query, setQuery] = useState("charizard");
+  const [queryID, setQueryID] = useState("6");
 
   //create useEffect
   useEffect(() => {
     getPokemon();
-  }, [query]);
+    getAttribute();
+  }, [query, queryID]);
 
   // API REQUEST METHODS
   // fetch method:
@@ -46,10 +73,22 @@ const GetPokemon = () => {
   // axios request method:
   const getPokemon = () => {
     api
-      .get(query.trim())
-      .then((response) => setPokemon(response.data))
+      .get(`/pokemon/` + query.trim())
+      .then((response) => {
+        setPokemon(response.data);
+        setQueryID(response.data.id);
+      })
       .catch((error) => {
         console.log("Ops! An error has occurred");
+      });
+  };
+
+  const getAttribute = async () => {
+    api
+      .get(`characteristic/${queryID}/`)
+      .then((response) => setAttributes(response.data))
+      .catch((error) => {
+        console.log("Ops! An error in ID has occurred");
       });
   };
 
@@ -62,6 +101,8 @@ const GetPokemon = () => {
     setQuery(search);
     setSearch("");
   };
+
+  // console.log(pokemon);
 
   return (
     <>
@@ -77,12 +118,9 @@ const GetPokemon = () => {
       ) : (
         <PokeData
           key={pokemon.id}
-          pokeName={pokemon.name}
-          abilities={pokemon.abilities}
-          image={pokemon.sprites.front_default}
-          weight={pokemon.weight}
-          types={pokemon.types}
-          marginBottom={10}
+          pokemon={pokemon}
+          attributes={attributes}
+          marginBottom={marginBottom}
         />
       )}
     </>
