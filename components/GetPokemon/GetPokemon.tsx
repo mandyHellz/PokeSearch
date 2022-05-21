@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import PokeData from "../PokeData/PokeData";
 import api from "../../pages/api/api";
 import SearchForm from "../Form/SearchForm";
+import { setTimeout } from "timers";
 
 export interface pokeProps {
   id: string;
@@ -14,6 +15,7 @@ export interface pokeProps {
   stats: [{ base_stat: number; stat: { name: string } }];
 }
 export interface pokeAttributesProps {
+  id: string;
   descriptions: [{ description: string; language: { name: string } }];
 }
 
@@ -29,6 +31,7 @@ const pokemonData = {
 } as pokeProps;
 
 const attributesData = {
+  id: "",
   descriptions: [{}],
 } as pokeAttributesProps;
 
@@ -47,8 +50,11 @@ const GetPokemon = ({
   //create useEffect
   useEffect(() => {
     getPokemon();
+  }, [query]);
+
+  useEffect(() => {
     getAttribute();
-  }, [query, queryID]);
+  }, [pokemon]);
 
   // API REQUEST METHODS
   // fetch method:
@@ -71,8 +77,8 @@ const GetPokemon = ({
   // console.log(query);
 
   // axios request method:
-  const getPokemon = () => {
-    api
+  const getPokemon = async () => {
+    await api
       .get(`/pokemon/` + query.trim())
       .then((response) => {
         setPokemon(response.data);
@@ -84,7 +90,7 @@ const GetPokemon = ({
   };
 
   const getAttribute = async () => {
-    api
+    await api
       .get(`characteristic/${queryID}/`)
       .then((response) => setAttributes(response.data))
       .catch((error) => {
@@ -101,8 +107,6 @@ const GetPokemon = ({
     setQuery(search);
     setSearch("");
   };
-
-  // console.log(pokemon);
 
   return (
     <>

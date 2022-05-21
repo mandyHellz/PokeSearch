@@ -10,33 +10,35 @@ const PokeData = ({
   attributes: pokeAttributesProps;
   marginBottom?: "10" | "20";
 }) => {
-  const [bgType, setBgType] = useState("");
+  const [bgType, setBgType] = useState<string | string[]>([]);
+  const [colorPicked, setColorPicked] = useState<boolean>(false);
 
   useEffect(() => {
+    setColorPicked(false);
     if (pokemon?.types) {
-      // const bgColorbyType = pokemon?.types?.map((item) => {
-      //   if (item?.type?.name !== undefined) {
-      //     return item?.type?.name;
-      //   }
-      // });
-      if (pokemon?.types[0].type?.name !== undefined) {
-        setBgType(`bg-type-${pokemon.types[0].type.name}`);
-        console.log(pokemon.types[0].type.name);
-      }
+      const colorPicker = pokemon?.types?.map((item) => {
+        if (item?.type?.name !== undefined) {
+          return item?.type?.name;
+        }
+      })[0];
+
+      setBgType(`type-${colorPicker}`);
     }
-  }, [pokemon, attributes]);
+  }, [pokemon]);
 
   useEffect(() => {
-    // console.log(bgType[0]);
+    if (bgType !== undefined) {
+      setColorPicked(false);
+    }
   }, [bgType]);
-
-  console.log(bgType);
 
   return (
     <>
       {pokemon && (
         <div
-          className={`${bgType} text-center rounded-xl w-full h-full sm:w-64 flex flex-col mx-auto mb-${marginBottom}`}
+          className={`${
+            !colorPicked ? "bg-type-ground" : `bg-${bgType}`
+          } text-center rounded-xl w-full h-full sm:w-64 flex flex-col mx-auto mb-${marginBottom}`}
         >
           <p className="flex justify-center items-center gap-4 p-2 text-2xl font-bold text-white capitalize">
             {pokemon.name}
@@ -56,7 +58,8 @@ const PokeData = ({
             <ul className="flex gap-4 pt-2 pb-4 justify-center items-center">
               {pokemon.types?.map((item) => (
                 <li
-                  className={`${bgType} text-center text-sm rounded-full w-20 p-1`}
+                  className={`text-center text-sm rounded-full w-20 p-1`}
+                  style={{ backgroundColor: `type-${item.type?.name}` }}
                 >
                   {item.type?.name}
                 </li>
@@ -96,21 +99,20 @@ const PokeData = ({
               </p>
             </div>
 
-            <div className="w-full text-left text-xxs">
-              {pokemon.stats?.map((stat) => (
-                <div className="flex items-center gap-2">
-                  <p className="flex-1 capitalize">{stat.stat?.name}:</p>
+            {pokemon.stats?.map((stat) => (
+              <div className="w-full flex items-center text-left leading-5 text-xxs">
+                <p className="flex-1 capitalize">{stat.stat?.name}:</p>
 
-                  <p className="w-5">{stat.base_stat}</p>
-                  <div className="flex-1 w-full h-1 bg-gray-200 rounded-full overflow-hidden overflow-x-hidden">
-                    <div
-                      className={`h-1 bg-primary transition duration-150 transition-width rounded-full`}
-                      style={{ width: stat.base_stat }}
-                    />
-                  </div>
+                <p className="w-10 text-center">{stat.base_stat}</p>
+
+                <div className="flex-1 h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                  <div
+                    className={`h-1.5 bg-primary rounded-full overflow-hidden`}
+                    style={{ width: stat.base_stat }}
+                  />
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       )}
