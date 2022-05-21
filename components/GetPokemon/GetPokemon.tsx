@@ -18,6 +18,10 @@ export interface pokeAttributesProps {
   id: string;
   descriptions: [{ description: string; language: { name: string } }];
 }
+export interface colorPaletteProps {
+  type: string;
+  color: string;
+}
 
 const pokemonData = {
   id: "",
@@ -35,6 +39,27 @@ const attributesData = {
   descriptions: [{}],
 } as pokeAttributesProps;
 
+export const colorPalette = [
+  { type: "psychic", color: "bg-type-psychic" },
+  { type: "rock", color: "bg-type-rock" },
+  { type: "ghost", color: "bg-type-ghost" },
+  { type: "steel", color: "bg-type-steel" },
+  { type: "water", color: "bg-type-water" },
+  { type: "grass", color: "bg-type-grass" },
+  { type: "ice", color: "bg-type-ice" },
+  { type: "dark", color: "bg-type-dark" },
+  { type: "fairy", color: "bg-type-fairy" },
+  { type: "normal", color: "bg-type-normal" },
+  { type: "fighting", color: "bg-type-fighting" },
+  { type: "flying", color: "bg-type-flying" },
+  { type: "poison", color: "bg-type-poison" },
+  { type: "ground", color: "bg-type-ground" },
+  { type: "bug", color: "bg-type-bug" },
+  { type: "fire", color: "bg-type-fire" },
+  { type: "electric", color: "bg-type-electric" },
+  { type: "dragon", color: "bg-type-dragon" },
+] as colorPaletteProps[];
+
 const GetPokemon = ({
   marginBottom = "10",
 }: {
@@ -46,6 +71,7 @@ const GetPokemon = ({
   const [search, setSearch] = useState("");
   const [query, setQuery] = useState("charizard");
   const [queryID, setQueryID] = useState("6");
+  const [color, setColor] = useState(colorPalette);
 
   //create useEffect
   useEffect(() => {
@@ -125,6 +151,7 @@ const GetPokemon = ({
           pokemon={pokemon}
           attributes={attributes}
           marginBottom={marginBottom}
+          colorPalette={color}
         />
       )}
     </>

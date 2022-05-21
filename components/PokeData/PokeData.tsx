@@ -1,44 +1,41 @@
 import React, { useEffect, useState } from "react";
-import { pokeAttributesProps, pokeProps } from "../GetPokemon/GetPokemon";
+import {
+  colorPaletteProps,
+  pokeAttributesProps,
+  pokeProps,
+} from "../GetPokemon/GetPokemon";
 
 const PokeData = ({
   pokemon,
   attributes,
+  colorPalette,
   marginBottom = "10",
 }: {
   pokemon: pokeProps;
   attributes: pokeAttributesProps;
+  colorPalette: colorPaletteProps[];
   marginBottom?: "10" | "20";
 }) => {
-  const [bgType, setBgType] = useState<string | string[]>([]);
-  const [colorPicked, setColorPicked] = useState<boolean>(false);
+  const [bgType, setBgType] = useState<any>();
 
   useEffect(() => {
-    setColorPicked(false);
-    if (pokemon?.types) {
-      const colorPicker = pokemon?.types?.map((item) => {
-        if (item?.type?.name !== undefined) {
-          return item?.type?.name;
+    if (pokemon?.types[0]?.type !== undefined) {
+      const type = colorPalette.find((item) => {
+        if (item.type === pokemon?.types[0]?.type?.name) {
+          const colorPicked = item.color;
+          setBgType(colorPicked);
         }
-      })[0];
-
-      setBgType(`type-${colorPicker}`);
+      });
     }
+
+    console.log(bgType);
   }, [pokemon]);
-
-  useEffect(() => {
-    if (bgType !== undefined) {
-      setColorPicked(false);
-    }
-  }, [bgType]);
 
   return (
     <>
       {pokemon && (
         <div
-          className={`${
-            !colorPicked ? "bg-type-ground" : `bg-${bgType}`
-          } text-center rounded-xl w-full h-full sm:w-64 flex flex-col mx-auto mb-${marginBottom}`}
+          className={`${bgType} text-center rounded-xl w-full h-full sm:w-64 flex flex-col mx-auto mb-${marginBottom}`}
         >
           <p className="flex justify-center items-center gap-4 p-2 text-2xl font-bold text-white capitalize">
             {pokemon.name}
@@ -57,10 +54,7 @@ const PokeData = ({
 
             <ul className="flex gap-4 pt-2 pb-4 justify-center items-center">
               {pokemon.types?.map((item) => (
-                <li
-                  className={`text-center text-sm rounded-full w-20 p-1`}
-                  style={{ backgroundColor: `type-${item.type?.name}` }}
-                >
+                <li className={`text-center text-sm rounded-full w-20 p-1 `}>
                   {item.type?.name}
                 </li>
               ))}
