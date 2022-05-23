@@ -2,7 +2,7 @@ const SearchForm = ({
   getSearch,
   search,
   updateSearch,
-  btnText = "Who is this Pokemon?",
+  btnText = "Get them!",
 }: {
   getSearch: (e: { preventDefault: () => void }) => void;
   search: string;
@@ -15,12 +15,12 @@ const SearchForm = ({
 }) => {
   return (
     <form
-      className=" md:flex items-center justify-center text-center mx-auto mt-10 mb-20 py-2 "
+      className="w-full flex flex-col sm:flex-row items-center justify-center text-center mx-auto mt-10 mb-20 p-2 gap-2"
       onSubmit={getSearch}
     >
       <input
         id="search-bar"
-        className={`w-1/2 border-2 rounded-md outline-none trnsform hover:border-yellow-400 lowercase`}
+        className={`w-full sm:w-3/5 border-2 rounded-md outline-none transform hover:border-yellow-400 lowercase`}
         required
         type="text"
         value={search}
@@ -29,7 +29,7 @@ const SearchForm = ({
 
       <button
         id="submit-btn"
-        className=" mt-2 md:mt-0 mx-2 rounded-md bg-yellow-400 py-1 px-2 text-white hover:bg-yellow-500 "
+        className="rounded-md bg-yellow-400 py-1 px-2 w-40 text-white hover:bg-yellow-500 "
         type="submit"
       >
         {`${btnText}`}

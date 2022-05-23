@@ -2,26 +2,11 @@ import React, { useEffect, useState } from "react";
 import PokeData from "../PokeData/PokeData";
 import api from "../../pages/api/api";
 import SearchForm from "../Form/SearchForm";
-import { setTimeout } from "timers";
-
-export interface pokeProps {
-  id: string;
-  name: string;
-  sprites: { other: { home: { front_default: string } } };
-  types: [{ type: { name: string } }];
-  weight: number;
-  height: number;
-  moves: [{ move: { name: string } }];
-  stats: [{ base_stat: number; stat: { name: string } }];
-}
-export interface pokeAttributesProps {
-  id: string;
-  descriptions: [{ description: string; language: { name: string } }];
-}
-export interface colorPaletteProps {
-  type: string;
-  color: string;
-}
+import {
+  colorPaletteProps,
+  pokeAttributesProps,
+  pokeProps,
+} from "../Typings/Typings";
 
 const pokemonData = {
   id: "",
@@ -60,6 +45,8 @@ export const colorPalette = [
   { type: "dragon", color: "bg-type-dragon" },
 ] as colorPaletteProps[];
 
+export const queryInitialValues = "";
+
 const GetPokemon = ({
   marginBottom = "10",
 }: {
@@ -69,8 +56,8 @@ const GetPokemon = ({
   const [pokemon, setPokemon] = useState(pokemonData);
   const [attributes, setAttributes] = useState(attributesData);
   const [search, setSearch] = useState("");
-  const [query, setQuery] = useState("charizard");
-  const [queryID, setQueryID] = useState("6");
+  const [query, setQuery] = useState<string | null>(null);
+  const [queryID, setQueryID] = useState<string>("");
   const [color, setColor] = useState(colorPalette);
 
   //create useEffect
@@ -104,24 +91,24 @@ const GetPokemon = ({
 
   // axios request method:
   const getPokemon = async () => {
-    await api
-      .get(`/pokemon/` + query.trim())
-      .then((response) => {
-        setPokemon(response.data);
-        setQueryID(response.data.id);
-      })
-      .catch((error) => {
-        console.log("Ops! An error has occurred");
-      });
+    try {
+      if (query !== null) {
+        const { data } = await api.get(`/pokemon/` + query.trim());
+        setPokemon(data);
+        setQueryID(data.id);
+      }
+    } catch (error) {
+      console.log("Ops! An error has occurred");
+    }
   };
 
   const getAttribute = async () => {
-    await api
-      .get(`characteristic/${queryID}/`)
-      .then((response) => setAttributes(response.data))
-      .catch((error) => {
-        console.log("Ops! An error in ID has occurred");
-      });
+    try {
+      const { data } = await api.get(`characteristic/${queryID}/`);
+      setAttributes(data);
+    } catch (error) {
+      console.log("Ops! An error has occurred");
+    }
   };
 
   const updateSearch = (e: any) => {
@@ -142,17 +129,28 @@ const GetPokemon = ({
         updateSearch={updateSearch}
         // btnText="Show me who is this"
       />
-
-      {pokemon === null || undefined ? (
-        "loading..."
+      {query === null ? (
+        <div className="w-full mx-auto h-112">
+          <img
+            src="/img/pokeball-3d.png"
+            alt="pokeball"
+            className="w-80 mx-auto"
+          />
+        </div>
       ) : (
-        <PokeData
-          key={pokemon.id}
-          pokemon={pokemon}
-          attributes={attributes}
-          marginBottom={marginBottom}
-          colorPalette={color}
-        />
+        <>
+          {pokemon === null || undefined ? (
+            "loading"
+          ) : (
+            <PokeData
+              key={pokemon.id}
+              pokemon={pokemon}
+              attributes={attributes}
+              marginBottom={marginBottom}
+              colorPalette={color}
+            />
+          )}
+        </>
       )}
     </>
   );
