@@ -57,6 +57,15 @@ module.exports = {
         'xxxs': '.50rem',
         'xxs': '.60rem',
       },
+      minWidth: {
+        xs: '375px',
+        sm: '640px',
+      },
+      maxWidth: {
+        container: '1280px',
+        menu: '1345px',
+        page: '1920px',
+      },
     },
   },
   variants: {
