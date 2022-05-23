@@ -12,8 +12,8 @@ const Home: NextPage = () => {
       </Head>
 
       <DefaultLayout>
-        <div className="max-w-page min-w-xs mx-auto">
-          <div className="w-full mx-auto my-10">
+        <div className="mx-auto w-full max-w-page mt-20">
+          <div className="w-full mx-auto">
             <GetPokemon marginBottom="10" />
           </div>
         </div>

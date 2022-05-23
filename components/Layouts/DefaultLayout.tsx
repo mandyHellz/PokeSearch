@@ -12,11 +12,20 @@ interface DefaultLayoutProps {
 
 const DefaultLayout = ({ children, useFooter = true }: DefaultLayoutProps) => {
   return (
-    <div className="flex flex-col relative min-w-xs text-primary-800 mx-auto">
-      <Header />
-      {children}
-      {useFooter && <Footer />}
-    </div>
+    <>
+      <div
+        style={{
+          height: "100",
+          background: "linear-gradient(0deg, #ffff 60%,  #BA0203 40%)",
+        }}
+      >
+        <div className="flex flex-col relative w-full min-w-xs text-primary-800 mx-auto max-h-screen">
+          <Header />
+          {children}
+          {useFooter && <Footer />}
+        </div>
+      </div>
+    </>
   );
 };
 

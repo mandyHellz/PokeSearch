@@ -45,6 +45,8 @@ export const colorPalette = [
   { type: "dragon", color: "bg-type-dragon" },
 ] as colorPaletteProps[];
 
+export const queryInitialValues = "";
+
 const GetPokemon = ({
   marginBottom = "10",
 }: {
@@ -54,8 +56,8 @@ const GetPokemon = ({
   const [pokemon, setPokemon] = useState(pokemonData);
   const [attributes, setAttributes] = useState(attributesData);
   const [search, setSearch] = useState("");
-  const [query, setQuery] = useState("charizard");
-  const [queryID, setQueryID] = useState("6");
+  const [query, setQuery] = useState<string | null>(null);
+  const [queryID, setQueryID] = useState<string>("");
   const [color, setColor] = useState(colorPalette);
 
   //create useEffect
@@ -90,9 +92,11 @@ const GetPokemon = ({
   // axios request method:
   const getPokemon = async () => {
     try {
-      const { data } = await api.get(`/pokemon/` + query.trim());
-      setPokemon(data);
-      setQueryID(data.id);
+      if (query !== null) {
+        const { data } = await api.get(`/pokemon/` + query.trim());
+        setPokemon(data);
+        setQueryID(data.id);
+      }
     } catch (error) {
       console.log("Ops! An error has occurred");
     }
@@ -125,17 +129,28 @@ const GetPokemon = ({
         updateSearch={updateSearch}
         // btnText="Show me who is this"
       />
-
-      {pokemon === null || undefined ? (
-        "loading..."
+      {query === null ? (
+        <div className="w-full mx-auto h-112">
+          <img
+            src="/img/pokeball-3d.png"
+            alt="pokeball"
+            className="w-80 mx-auto"
+          />
+        </div>
       ) : (
-        <PokeData
-          key={pokemon.id}
-          pokemon={pokemon}
-          attributes={attributes}
-          marginBottom={marginBottom}
-          colorPalette={color}
-        />
+        <>
+          {pokemon === null || undefined ? (
+            "loading"
+          ) : (
+            <PokeData
+              key={pokemon.id}
+              pokemon={pokemon}
+              attributes={attributes}
+              marginBottom={marginBottom}
+              colorPalette={color}
+            />
+          )}
+        </>
       )}
     </>
   );

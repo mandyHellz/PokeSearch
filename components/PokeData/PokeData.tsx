@@ -34,12 +34,12 @@ const PokeData = ({
   return (
     <>
       {pokemon && (
-        <div className="bg-white w-4/6 h-full sm:w-64 mx-auto rounded-xl">
+        <div className="bg-white h-full w-1/2 sm:w-64 mx-auto rounded-xl">
           <div
             className={`${bgType} bg-opacity-70 h-full text-center rounded-xl flex flex-col mx-auto mb-${marginBottom}`}
           >
             <p className="flex justify-center items-center gap-4 p-2 text-2xl font-bold text-white capitalize">
-              {pokemon.name}
+              {pokemon?.name}
             </p>
 
             <div className="w-full flex justify-end px-5">
@@ -49,17 +49,17 @@ const PokeData = ({
             <div className="bg-white text-center rounded-xl w-11/12 sm:w-60 mx-auto px-1 pb-4 my-2">
               <img
                 className="m-auto w-40 -mt-28"
-                src={pokemon.sprites?.other?.home?.front_default}
+                src={pokemon?.sprites?.other?.home?.front_default}
                 alt="pokemon"
               />
 
               <ul className="flex gap-4 pt-2 pb-4 justify-center items-center">
-                {pokemon.types?.map((item) => (
+                {pokemon?.types?.map((item) => (
                   <li
                     key={item?.type?.name}
                     className={`text-center text-sm rounded-full w-20 p-1 ${bgType} bg-opacity-60`}
                   >
-                    {item.type?.name}
+                    {item?.type?.name}
                   </li>
                 ))}
               </ul>
@@ -69,15 +69,15 @@ const PokeData = ({
                 <div className="flex justify-around sm:justify-center items-center gap-4 sm:gap-2 text-xxs sm:text-xs">
                   <div className="w-full flex justify-center items-center gap-0.5">
                     <img src="/img/Weight.png" />
-                    <p>{pokemon.weight / 10} kgs</p>
+                    <p>{pokemon?.weight / 10} kgs</p>
                   </div>
                   <div className="w-full flex justify-center items-center gap-1 border-r border-l">
                     <img src="/img/Height.png" />
-                    <p>{pokemon.height / 10} m</p>
+                    <p>{pokemon?.height / 10} m</p>
                   </div>
                   <div className="w-full flex flex-col justify-center items-center">
                     <ul className="text-xxs">
-                      {pokemon.moves
+                      {pokemon?.moves
                         ?.map((item) => (
                           <li className="text-center">{item?.move?.name}</li>
                         ))
@@ -97,16 +97,16 @@ const PokeData = ({
                 </p>
               </div>
 
-              {pokemon.stats?.map((stat) => (
+              {pokemon?.stats?.map((stat) => (
                 <div className="w-full flex items-center text-left leading-5 text-xxs">
-                  <p className="flex-1 capitalize">{stat.stat?.name}:</p>
+                  <p className="flex-1 capitalize">{stat?.stat?.name}:</p>
 
-                  <p className="w-10 text-center">{stat.base_stat}</p>
+                  <p className="w-10 text-center">{stat?.base_stat}</p>
 
                   <div className="flex-1 h-1.5 bg-gray-200 rounded-full overflow-hidden">
                     <div
                       className={`h-1.5 ${bgType} bg-opacity-70 rounded-full overflow-hidden`}
-                      style={{ width: stat.base_stat }}
+                      style={{ width: stat?.base_stat }}
                     />
                   </div>
                 </div>

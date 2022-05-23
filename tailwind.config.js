@@ -6,10 +6,12 @@ module.exports = {
     extend: {
       backgroundImage: (theme) => ({
         "home-banner": "url(/img/pokemon-banner-03.jpeg)",
+        pokeball: "url(/img/pokeball-3d.png)",
       }),
       height: {
         98: "24.5rem",
         100: "25rem",
+        112: "28rem",
         124: "31rem",
         128: "32rem",
         240: "60rem",
@@ -50,7 +52,8 @@ module.exports = {
           bug: "#A7B723",
           fire: "#F57D31",
           electric: "#F9CF30",
-          dragon: "#7037FF"
+          dragon: "#7037FF",
+          poketheme: "#BA0203",
         }
       },
       fontSize: {
