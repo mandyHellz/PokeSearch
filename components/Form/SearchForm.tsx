@@ -15,7 +15,7 @@ const SearchForm = ({
 }) => {
   return (
     <form
-      className="w-full flex flex-col sm:flex-row items-center justify-center text-center mx-auto mt-10 mb-20 p-2 gap-2"
+      className="w-full flex flex-col sm:flex-row items-center justify-center text-center mx-auto mb-20 p-2 gap-2"
       onSubmit={getSearch}
     >
       <input
