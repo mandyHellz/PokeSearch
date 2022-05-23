@@ -89,24 +89,22 @@ const GetPokemon = ({
 
   // axios request method:
   const getPokemon = async () => {
-    await api
-      .get(`/pokemon/` + query.trim())
-      .then((response) => {
-        setPokemon(response.data);
-        setQueryID(response.data.id);
-      })
-      .catch((error) => {
-        console.log("Ops! An error has occurred");
-      });
+    try {
+      const { data } = await api.get(`/pokemon/` + query.trim());
+      setPokemon(data);
+      setQueryID(data.id);
+    } catch (error) {
+      console.log("Ops! An error has occurred");
+    }
   };
 
   const getAttribute = async () => {
-    await api
-      .get(`characteristic/${queryID}/`)
-      .then((response) => setAttributes(response.data))
-      .catch((error) => {
-        console.log("Ops! An error in ID has occurred");
-      });
+    try {
+      const { data } = await api.get(`characteristic/${queryID}/`);
+      setAttributes(data);
+    } catch (error) {
+      console.log("Ops! An error has occurred");
+    }
   };
 
   const updateSearch = (e: any) => {
