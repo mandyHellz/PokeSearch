@@ -3,7 +3,7 @@ import {
   colorPaletteProps,
   pokeAttributesProps,
   pokeProps,
-} from "../GetPokemon/GetPokemon";
+} from "../Typings/Typings";
 
 const PokeData = ({
   pokemon,
@@ -20,7 +20,7 @@ const PokeData = ({
 
   useEffect(() => {
     if (pokemon?.types[0]?.type !== undefined) {
-      const type = colorPalette.find((item) => {
+      colorPalette.find((item) => {
         if (item.type === pokemon?.types[0]?.type?.name) {
           const colorPicked = item.color;
           setBgType(colorPicked);
@@ -34,16 +34,16 @@ const PokeData = ({
   return (
     <>
       {pokemon && (
-        <div className="bg-white w-full h-full sm:w-64 mx-auto">
+        <div className="bg-white w-5/6 h-full sm:w-64 mx-auto rounded-xl">
           <div
-            className={`${bgType} bg-opacity-90 text-center rounded-xl flex flex-col mx-auto mb-${marginBottom}`}
+            className={`${bgType} bg-opacity-70 h-full text-center rounded-xl flex flex-col mx-auto mb-${marginBottom}`}
           >
             <p className="flex justify-center items-center gap-4 p-2 text-2xl font-bold text-white capitalize">
               {pokemon.name}
             </p>
 
             <div className="w-full flex justify-end px-5">
-              <img className="w-36 -mt-10" src="/img/Pokeball.png" />
+              <img className="w-36 -mt-10" src="\img\Pokeball.png" />
             </div>
 
             <div className="bg-white text-center rounded-xl w-11/12 sm:w-60 mx-auto px-1 pb-4 my-2">
@@ -102,7 +102,7 @@ const PokeData = ({
 
                   <div className="flex-1 h-1.5 bg-gray-200 rounded-full overflow-hidden">
                     <div
-                      className={`h-1.5 bg-primary rounded-full overflow-hidden`}
+                      className={`h-1.5 ${bgType} bg-opacity-70 rounded-full overflow-hidden`}
                       style={{ width: stat.base_stat }}
                     />
                   </div>
