@@ -2,26 +2,11 @@ import React, { useEffect, useState } from "react";
 import PokeData from "../PokeData/PokeData";
 import api from "../../pages/api/api";
 import SearchForm from "../Form/SearchForm";
-import { setTimeout } from "timers";
-
-export interface pokeProps {
-  id: string;
-  name: string;
-  sprites: { other: { home: { front_default: string } } };
-  types: [{ type: { name: string } }];
-  weight: number;
-  height: number;
-  moves: [{ move: { name: string } }];
-  stats: [{ base_stat: number; stat: { name: string } }];
-}
-export interface pokeAttributesProps {
-  id: string;
-  descriptions: [{ description: string; language: { name: string } }];
-}
-export interface colorPaletteProps {
-  type: string;
-  color: string;
-}
+import {
+  colorPaletteProps,
+  pokeAttributesProps,
+  pokeProps,
+} from "../Typings/Typings";
 
 const pokemonData = {
   id: "",
