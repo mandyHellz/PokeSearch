@@ -57,7 +57,7 @@ const PokeData = ({
                 {pokemon.types?.map((item) => (
                   <li
                     key={item?.type?.name}
-                    className={`text-center text-sm rounded-full w-20 p-1 ${bgType} bg-opacity-70`}
+                    className={`text-center text-sm rounded-full w-20 p-1 ${bgType} bg-opacity-60`}
                   >
                     {item.type?.name}
                   </li>

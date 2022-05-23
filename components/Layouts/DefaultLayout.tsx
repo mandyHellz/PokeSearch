@@ -12,8 +12,7 @@ interface DefaultLayoutProps {
 
 const DefaultLayout = ({ children, useFooter = true }: DefaultLayoutProps) => {
   return (
-    <div className="flex flex-col relative min-w-xs text-primary-800">
-      {/* <div className="text-primary-800 relative h-screen"> */}
+    <div className="flex flex-col relative min-w-xs text-primary-800 mx-auto">
       <Header />
       {children}
       {useFooter && <Footer />}

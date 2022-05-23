@@ -1,21 +1,21 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import GetPokemon from "../components/GetPokemon/GetPokemon";
 import DefaultLayout from "../components/Layouts/DefaultLayout";
-import Access from "../components/SignIn/access";
 
 const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>React Learnings</title>
+        <title>PokeSearch</title>
         <link rel="icon" href="/favicon.svg" />
       </Head>
 
       <DefaultLayout>
-        <div className="">
-          <GetPokemon marginBottom="10" />
+        <div className="max-w-page min-w-xs mx-auto">
+          <div className="w-full mx-auto my-10">
+            <GetPokemon marginBottom="10" />
+          </div>
         </div>
       </DefaultLayout>
     </>
