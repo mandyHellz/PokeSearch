@@ -34,7 +34,7 @@ const PokeData = ({
   return (
     <>
       {pokemon && (
-        <div className="bg-white w-5/6 h-full sm:w-64 mx-auto rounded-xl">
+        <div className="bg-white w-4/6 h-full sm:w-64 mx-auto rounded-xl">
           <div
             className={`${bgType} bg-opacity-70 h-full text-center rounded-xl flex flex-col mx-auto mb-${marginBottom}`}
           >
@@ -56,7 +56,7 @@ const PokeData = ({
               <ul className="flex gap-4 pt-2 pb-4 justify-center items-center">
                 {pokemon.types?.map((item) => (
                   <li
-                    key={item.type.name}
+                    key={item?.type?.name}
                     className={`text-center text-sm rounded-full w-20 p-1 ${bgType} bg-opacity-70`}
                   >
                     {item.type?.name}

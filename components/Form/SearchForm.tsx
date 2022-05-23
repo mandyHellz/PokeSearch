@@ -2,7 +2,7 @@ const SearchForm = ({
   getSearch,
   search,
   updateSearch,
-  btnText = "Who is this Pokemon?",
+  btnText = "Get them!",
 }: {
   getSearch: (e: { preventDefault: () => void }) => void;
   search: string;
